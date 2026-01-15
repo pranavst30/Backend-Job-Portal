@@ -4,7 +4,7 @@ A comprehensive RESTful API for a job portal application built with Node.js, Exp
 
 **Author:** Pranav Tavarej  
 **Version:** 1.0.0  
-**Repository:** [https://github.com/pranavst30/Job-Portal-Backend](https://github.com/pranavst30/Job-Portal-Backend)
+**Repository:** [https://github.com/pranavst30/Backend-Job-Portal](https://github.com/pranavst30/Backend-Job-Portal)
 
 ---
 
@@ -77,7 +77,7 @@ A comprehensive RESTful API for a job portal application built with Node.js, Exp
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/pranavst30/Job-Portal-Backend.git
+   git clone https://github.com/pranavst30/Backend-Job-Portal.git
    cd Job-Portal-Backend
    ```
 

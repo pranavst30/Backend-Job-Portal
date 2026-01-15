@@ -17,7 +17,7 @@ Before you begin, ensure you have:
 
 ### Option A: Clone from GitHub
 ```bash
-git clone https://github.com/pranavst30/Job-Portal-Backend.git
+git clone https://github.com/pranavst30/Backend-Job-Portal.git
 cd Job-Portal-Backend
 ```
 
