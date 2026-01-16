@@ -119,43 +119,6 @@ A comprehensive RESTful API for a job portal application built with Node.js, Exp
 
 ---
 
-## API Endpoints
-
-### Authentication (`/api/v1/auth`)
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/register` | Register a new user | No |
-| POST | `/login` | Login user | No |
-
-### User Management (`/api/v1/user`)
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| PUT | `/update-user` | Update user profile | Yes |
-| GET | `/all` | Get all users | No |
-| GET | `/:id` | Get user by ID | No |
-| DELETE | `/delete-user` | Delete user account | Yes |
-| POST | `/get-user` | Get authenticated user data | Yes |
-
-### Job Management (`/api/v1/job`)
-
-| Method | Endpoint | Description | Auth Required | Employer Only |
-|--------|----------|-------------|---------------|---------------|
-| POST | `/create` | Create a new job | Yes | Yes |
-| PUT | `/update-job/:id` | Update a job | Yes | Yes |
-| DELETE | `/delete-job/:id` | Delete a job | Yes | Yes |
-| GET | `/all` | Get all jobs | No | No |
-| GET | `/:id` | Get job by ID | No | No |
-| GET | `/job-stats` | Get job statistics | Yes | No |
-
-### Application Management (`/api/v1/application`)
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/apply/:jobId` | Apply for a job | Yes |
-| DELETE | `/delete/:id` | Delete application | Yes |
-| GET | `/all` | Get user's applications | Yes |
 
 ---
 
@@ -404,27 +367,7 @@ This project is licensed under the ISC License.
 
 ---
 
-## Author
 
-**Pranav Tavarej**
-
----
-
-## Support
-
-For support, please open an issue in the repository or contact the author.
-
----
-
-## Version History
-
-- **v1.0.0** - Initial release with core features
-  - User authentication
-  - Job management
-  - Application tracking
-  - API documentation
-
----
 
 
 ---
