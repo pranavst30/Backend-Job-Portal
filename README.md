@@ -426,14 +426,6 @@ For support, please open an issue in the repository or contact the author.
 
 ---
 
-## Important Notes
-
-1. **Never commit the `.env` file** - It contains sensitive credentials
-2. **Change the JWT_KEY** in production to a strong, random string
-3. **Configure CORS properly** for production use (currently commented in index.js)
-4. **Set up MongoDB indexes** for better performance in production
-5. **Enable HTTPS** in production environments
 
 ---
 
-Made with care by Pranav Tavarej
