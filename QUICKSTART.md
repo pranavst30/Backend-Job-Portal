@@ -284,6 +284,3 @@ Ready to deploy? Check out our [Deployment Guide](./DEPLOYMENT.md) for:
 
 ---
 
-**Happy Coding!**
-
-Built with care by Pranav Tavarej
