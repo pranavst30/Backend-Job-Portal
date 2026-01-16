@@ -2,10 +2,6 @@
 
 A comprehensive RESTful API for a job portal application built with Node.js, Express, and MongoDB. This backend supports user authentication, job posting management, and application tracking for both job seekers and employers.
 
-**Author:** Pranav Tavarej  
-**Version:** 1.0.0  
-**Repository:** [https://github.com/pranavst30/Backend-Job-Portal](https://github.com/pranavst30/Backend-Job-Portal)
-
 ---
 
 ## Features
