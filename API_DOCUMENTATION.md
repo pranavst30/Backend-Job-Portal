@@ -616,5 +616,3 @@ RateLimit-Reset: 1642252800
 
 ---
 
-**Last Updated:** January 2026  
-**Maintained by:** Pranav Tavarej
