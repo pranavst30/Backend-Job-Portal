@@ -1,14 +1,17 @@
 import Application from "../models/applicationModel.js";
 import fs from "fs";
-import jobsModel from "../models/jobsModel.js";
+import Job from "../models/jobsModel.js";
 
 export const createApplication = async (req, res, next) => {
   const userId = req.user.userId;
   const jobId = req.params.jobId;
+  const job = await Job.findById(jobId);
+
+  if (!job) return next("no job exists with this id");
+  if (job.status !== "open") return next("this job is no longer accepting applications");
 
   const application = new Application({ userId, jobId });
-  // if (req.file) application.resume = req.file.path;
-  // else return next("you need to upload your resume in PDF format");
+  if (req.file) application.resume = req.file.path;
   const savedApp = await application.save();
   res.status(201).json({
     message: "Your application was submitted",
@@ -27,14 +30,13 @@ export const deleteApplication = async (req, res, next) => {
     return next("You are not authorized");
 
   const resumePath = application.resume;
-
-  fs.unlink(resumePath, (err) => {
-    if (err) {
-      console.log(err);
-      return next("something went wrong");
+  if (resumePath) {
+    try {
+      await fs.promises.unlink(resumePath);
+    } catch (error) {
+      if (error.code !== "ENOENT") return next("something went wrong");
     }
-    console.log("file deleted");
-  });
+  }
 
   await Application.deleteOne({ _id: applicationId });
 
@@ -55,7 +57,7 @@ export const getMyApplications = async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    Total_applications: queryResult.length,
+    totalApplications: application.length,
     application,
   });
 };

@@ -19,21 +19,29 @@ export const createJob = async (req, res, next) => {
 
 export const updateJob = async (req, res, next) => {
   const id = req.params.id;
-  const updateJob = await Job.findByIdAndUpdate(
-    id,
-    { $set: req.body },
+  const { company, position, status, workType, workLocation, desc } = req.body;
+  const updates = { company, position, status, workType, workLocation, desc };
+  Object.keys(updates).forEach((key) => {
+    if (updates[key] === undefined) delete updates[key];
+  });
+
+  const updatedJob = await Job.findOneAndUpdate(
+    { _id: id, employer: req.user.userId },
+    { $set: updates },
     { new: true, runValidators: true }
   );
 
+  if (!updatedJob) return next("job not found or you are not authorized");
+
   res
     .status(200)
-    .json({ success: true, message: "job updated successfullly", updateJob });
+    .json({ success: true, message: "job updated successfully", updatedJob });
 };
 
 export const deleteJob = async (req, res, next) => {
   const id = req.params.id;
-  const job = await Job.findById(id);
-  if (!job) return next(`no job with this id: ${id} exists`);
+  const job = await Job.findOne({ _id: id, employer: req.user.userId });
+  if (!job) return next("job not found or you are not authorized");
   try {
     await Application.deleteMany({ jobId: job._id });
   } catch (error) {
@@ -50,7 +58,7 @@ export const getAllJobs = async (req, res, next) => {
     req.query;
   const queryObject = {};
   if (mine && req.user) {
-    queryObject.employer = req.user.id;
+    queryObject.employer = req.user.userId;
   }
   if (company && company != "all") {
     queryObject.company = company;
@@ -91,7 +99,7 @@ export const getAllJobs = async (req, res, next) => {
   const skip = (page - 1) * limit;
 
   // jobs count
-  const totalJobs = await Job.countDocuments(queryResult);
+  const totalJobs = await Job.countDocuments(queryObject);
 
   queryResult = queryResult.skip(skip).limit(limit);
 

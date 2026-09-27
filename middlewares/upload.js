@@ -14,8 +14,8 @@ const storage = multer.diskStorage({
 export const upload = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
-    let ext = path.extname(file.originalname);
-    if (ext == ".pdf") callback(null, true);
+    let ext = path.extname(file.originalname).toLowerCase();
+    if (ext === ".pdf") callback(null, true);
     else {
       console.log("only pdf format is allowed");
       callback(null, false);

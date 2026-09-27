@@ -3,10 +3,11 @@ import Application from "../models/applicationModel.js";
 
 const userAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer"))
+  if (!authHeader || !authHeader.startsWith("Bearer "))
     return next("You are not authorized");
 
   const token = authHeader.split(" ")[1];
+  if (!token) return next("You are not authorized");
 
   try {
     const payload = JWT.verify(token, process.env.JWT_KEY);

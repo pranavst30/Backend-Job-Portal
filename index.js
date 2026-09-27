@@ -45,7 +45,6 @@ const options = {
 const spec = swaggerDoc(options);
 const app = express();
 
-<<<<<<< HEAD
 app.use(mongoSanitize());
 app.use(helmet());
 app.use(xss());
@@ -53,16 +52,6 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use("/uploads", express.static("uploads"));
-=======
-// middlewares
-app.use(mongoSanitize()); //to secure database
-app.use(helmet()); //to secure header data
-app.use(xss()); //to prevent from cross site scripting
-app.use(express.json()); //to use json data in our application
-
-app.use(morgan("dev")); //logs which api route has been called and other info
-app.use("/uploads", express.static("uploads")); //to serve uploaded file
->>>>>>> c3c8ddfc02b10571f3240739db7f9599fb95ef6a
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/auth", authRoutes);

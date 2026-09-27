@@ -12,6 +12,7 @@ export const updateUser = async (req, res, next) => {
   await user.save();
 
   const token = user.createJWT();
+  user.password = undefined;
 
   res.status(200).json({
     message: "user updated successfully",
@@ -22,12 +23,12 @@ export const updateUser = async (req, res, next) => {
 };
 
 export const getAllUser = async (req, res, next) => {
-  const users = await User.find({});
+  const users = await User.find({}).select("-password");
   res.status(200).json(users);
 };
 
 export const getUser = async (req, res, next) => {
-  const user = await User.findById({ _id: req.params.id });
+  const user = await User.findById({ _id: req.params.id }).select("-password");
   res.status(200).json(user);
 };
 
