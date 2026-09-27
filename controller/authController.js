@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import { createToken } from "../utils/jwt.js";
 
 export const register = async (req, res, next) => {
   const { email, password, name } = req.body;
@@ -17,7 +18,7 @@ export const register = async (req, res, next) => {
   const user = new User(req.body);
   await user.save();
 
-  const token = user.createJWT();
+  const token = createToken(user);
 
   res.status(201).json({
     success: true,
@@ -46,7 +47,7 @@ export const login = async (req, res, next) => {
 
   if (!check) return next("wrong email id or password");
 
-  const token = user.createJWT();
+  const token = createToken(user);
 
   user.password = undefined;
 

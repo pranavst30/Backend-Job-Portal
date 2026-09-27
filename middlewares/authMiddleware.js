@@ -1,5 +1,5 @@
-import JWT from "jsonwebtoken";
 import Application from "../models/applicationModel.js";
+import { verifyToken } from "../utils/jwt.js";
 
 const userAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -10,7 +10,7 @@ const userAuth = async (req, res, next) => {
   if (!token) return next("You are not authorized");
 
   try {
-    const payload = JWT.verify(token, process.env.JWT_KEY);
+    const payload = verifyToken(token);
     req.user = { userId: payload.userId, isEmployer: payload.isEmp };
     next();
   } catch (error) {

@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import { createToken } from "../utils/jwt.js";
 
 export const updateUser = async (req, res, next) => {
   const { email, name, location } = req.body;
@@ -11,7 +12,7 @@ export const updateUser = async (req, res, next) => {
   user.location = location;
   await user.save();
 
-  const token = user.createJWT();
+  const token = createToken(user);
   user.password = undefined;
 
   res.status(200).json({

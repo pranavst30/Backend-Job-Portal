@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,7 +12,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password cannot be empty"],
       minlength: [6, "length of password should be greater than 6"],
-      select: true,
+      select: false,
     },
     email: {
       type: String,
@@ -40,21 +39,9 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-// JSON Token
-userSchema.methods.createJWT = function () {
-  return jwt.sign(
-    { userId: this._id, isEmp: this.isEmployer },
-    process.env.JWT_KEY,
-    {
-      expiresIn: "3d",
-    }
-  );
-};
-
 // compare password
 userSchema.methods.comparePassword = async function (userPassword) {
-  const isMatch = bcrypt.compare(userPassword, this.password);
-  return isMatch;
+  return bcrypt.compare(userPassword, this.password);
 };
 
 export default mongoose.model("User", userSchema);
